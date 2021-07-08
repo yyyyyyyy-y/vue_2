@@ -1,6 +1,6 @@
 <template>
 <div class="login-container">
-  <div class="login-box"></div>
+  <div class="login-box">box</div>
 </div>
 </template>
 
