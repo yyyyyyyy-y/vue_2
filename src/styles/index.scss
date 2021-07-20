@@ -1,0 +1,24 @@
+@import "src/styles/color";
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;// Firefox字体平滑
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;//定义浏览器渲染引擎如何渲染字体
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+//
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input{
+  outline: none;
+}
