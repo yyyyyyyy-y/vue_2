@@ -5,11 +5,9 @@ import App from './App.vue';
 import router from './router';
 
 // 引入element-ui
-import ElementUI from 'element-ui';
-// 样式文件需要单独引入
-import 'element-ui/lib/theme-chalk/index.css';
-// 使用声明
-Vue.use(ElementUI);
+import ElementUI from 'element-ui';// 引入依赖
+import 'element-ui/lib/theme-chalk/index.css';// 样式文件需要单独引入
+Vue.use(ElementUI);// 使用声明
 
 // 引入全局样式
 import '@/styles/index.scss'
