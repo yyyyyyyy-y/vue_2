@@ -252,89 +252,6 @@ export default {
           level: 1
         },
       ],
-      allTableData1: [
-        {
-          id: 1,
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: '',
-          hasChildren: true,
-          level: 1
-        },
-        {
-          id: 11,
-          date: '2016-05-02',
-          name: '王小牛',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 1,
-          hasChildren: true,
-          level: 2
-        },
-        {
-          id: 111,
-          date: '2016-05-02',
-          name: '王小牛',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 11,
-          hasChildren: false,
-          level: 3
-        },
-        {
-          id: 112,
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 11,
-          hasChildren: false,
-          level: 3
-        },
-        {
-          id: 12,
-          date: '2016-05-02',
-          name: '王小牛',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 1,
-          hasChildren: true,
-          level: 2
-        },
-        {
-          id: 121,
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 12,
-          hasChildren: false,
-          level: 3
-        },
-        {
-          id: 2,
-          date: '2016-05-02',
-          name: '王小猫',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: '',
-          hasChildren: true,
-          level: 1
-        },
-        {
-          id: 21,
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 2,
-          hasChildren: false,
-          level: 2
-        },
-        {
-          id: 3,
-          date: '2016-05-02',
-          name: '王小狗',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: '',
-          hasChildren: false,
-          level: 1
-        },
-      ],
       dialogType: ''
     }
   },
@@ -365,19 +282,20 @@ export default {
       console.log(i);
       this.allTableData[i].hasChildren = true
 
-      this.addSonData.id = Number(this.currentRow.id + '9')
+      this.addSonData.id = Math.random()*1000
       this.addSonData.parentId = this.currentRow.id
       this.addSonData.hasChildren = false
       this.addSonData.date = '2098-29-98'
       this.addSonData.level = this.currentRow.level + 1
       this.allTableData.push(this.addSonData)
-      console.log(this.allTableData)
+      console.log(this.tableData1)
 
       // this.load(this.currentRow, treeNode, resolve)
       // this.tableKey += 1
       this.showAddSon = false
       // this.expandId.push(String(this.currentRow.id))
       // console.log(this.expandId);
+
     },
 
     closeAddSon() {
