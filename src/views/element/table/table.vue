@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-table
+        ref="table"
         :data="tableData1"
         style="width: 100%"
         row-key="id"
@@ -14,9 +15,11 @@
           prop="name"
           label="姓名"
           width="180">
-        <template slot="header" slot-scope="scope">
-          <span>{{scope.row}}</span>
-<!--          <el-button type="primary" circle v-for="i in 4" :key="i">{{i}}</el-button>-->
+        <template slot="header">
+          <span>姓名</span>
+          <span
+              style="width: 20px;height: 20px;display: inline-block;margin-left: 10px;border-radius: 20px;border: 1px solid red;"
+              v-for="i in 5" :key="i" @click="expandList(i)">{{ i }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -31,7 +34,7 @@
       <el-table-column
           label="操作">
         <template slot-scope="scope">
-          <el-button @click="addSon(scope.row)">添加子节点</el-button>
+          <el-button @click="addSon(scope)">添加子节点</el-button>
           <el-button @click="addOrLookDetails(scope.row)">修改</el-button>
           <el-button @click="deleteSon(scope.row)">删除</el-button>
         </template>
@@ -95,10 +98,13 @@ export default {
   name: "Table",
   data() {
     return {
+      parentMap: new Map(),
+      maps: new Map(),
       test: [],
       tableKey: 0,
       expandId: [],
       tableData1: [],
+      tableData2: [],
 
       currentRow: {},
       currentTreeNode: {},
@@ -173,86 +179,126 @@ export default {
         {
           id: 1,
           date: '2016-05-02',
-          name: '王小虎',
+          name: '王小虎1',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: '',
           hasChildren: true,
+          children: [],
           level: 1
         },
         {
           id: 11,
           date: '2016-05-02',
-          name: '王小牛',
+          name: '王小牛11',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: 1,
           hasChildren: true,
+          children: [],
           level: 2
         },
         {
           id: 111,
           date: '2016-05-02',
-          name: '王小牛',
+          name: '王小牛111',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: 11,
-          hasChildren: false,
+          hasChildren: true,
+          children: [],
           level: 3
+        },
+        {
+          id: 1111,
+          date: '2016-05-02',
+          name: '王小牛111',
+          address: '上海市普陀区金沙江路 1518 弄',
+          parentId: 111,
+          hasChildren: true,
+          children: [],
+          level: 4
+        },
+        {
+          id: 11111,
+          date: '2016-05-02',
+          name: '王小牛111',
+          address: '上海市普陀区金沙江路 1518 弄',
+          parentId: 1111,
+          hasChildren: false,
+          children: [],
+          level: 5
         },
         {
           id: 112,
           date: '2016-05-02',
-          name: '王小虎',
+          name: '王小虎112',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: 11,
           hasChildren: false,
+          children: [],
           level: 3
         },
         {
           id: 12,
           date: '2016-05-02',
-          name: '王小牛',
+          name: '王小牛12',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: 1,
           hasChildren: true,
+          children: [],
           level: 2
         },
         {
           id: 121,
           date: '2016-05-02',
-          name: '王小虎',
+          name: '王小虎121',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: 12,
           hasChildren: false,
+          children: [],
           level: 3
         },
         {
           id: 2,
           date: '2016-05-02',
-          name: '王小猫',
+          name: '王小猫2',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: '',
           hasChildren: true,
+          children: [],
           level: 1
         },
         {
           id: 21,
           date: '2016-05-02',
-          name: '王小虎',
+          name: '王小虎21',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: 2,
-          hasChildren: false,
+          hasChildren: true,
+          children: [],
           level: 2
+        },
+        {
+          id: 211,
+          date: '2016-05-02',
+          name: '王小虎21',
+          address: '上海市普陀区金沙江路 1518 弄',
+          parentId: 21,
+          hasChildren: false,
+          children: [],
+          level: 3
         },
         {
           id: 3,
           date: '2016-05-02',
-          name: '王小狗',
+          name: '王小狗3',
           address: '上海市普陀区金沙江路 1518 弄',
           parentId: '',
           hasChildren: false,
+          children: [],
           level: 1
         },
       ],
-      dialogType: ''
+      dialogType: '',
+      newTableList:[]
     }
   },
   created() {
@@ -264,38 +310,87 @@ export default {
       console.log(scope)
     },
 
-    addSon(row) {
-      this.currentRow = row
-      console.log(this.currentRow);
+    expandList(expandLevel) {
+      // this.getChildren(this.tableData1,expandLevel)
+      this.aaa().then(res=>{
+        res.forEach(item=>{
+          this.getChildren(item,expandLevel)
+        })
+      })
+      console.log(this.tableData1)
+      console.log(this.expandId);
+    },
+
+    getChildren(item,level){
+      const temp=[]
+      let currentLevel = item.level
+      if (item.level<=level&&item.hasChildren){
+        this.allTableData.forEach(list=>{
+          if (item.id === list.parentId){
+            temp.push(list)
+            this.$set(item,'children',temp)
+          }
+        })
+        // this.expandId.push(String(item.id))
+        this.$refs.table.toggleRowExpansion(item,true)
+      }
+      currentLevel ++
+      if (currentLevel<=level){
+        item.children.forEach(data=>{
+          this.getChildren(data,level)
+        })
+      }
+    },
+
+    aaa(){
+      return new Promise(resolve => {
+        this.tableData1 = JSON.parse(JSON.stringify(this.tableData2))
+        this.expandId=[]
+        resolve(this.tableData1)
+      })
+    },
+
+    getList(list){
+      console.log(list);
+    },
+
+    getExpandList(currentLevel){
+      this.allTableData.forEach(item=>{
+        if (currentLevel === item.level){
+          console.log(item);
+          this.$refs.form.store.loadOrToggle(item)
+        }
+      })
+    },
+
+    addSon(scope) {
+      this.currentRow = scope.row
       this.addSonData = {
-        id:'',
-        parentId:'',
-        hasChildren:false,
-        date:'',
-        level:''
+        id: '',
+        parentId: '',
+        hasChildren: false,
+        date: '',
+        level: ''
       }
       this.showAddSon = true
     },
 
     confirmAddSon() {
       const i = this.allTableData.findIndex(item => item.id === this.currentRow.id)
-      console.log(i);
       this.allTableData[i].hasChildren = true
 
-      this.addSonData.id = Math.random()*1000
+      this.addSonData.id = Math.random() * 10000000000000
       this.addSonData.parentId = this.currentRow.id
       this.addSonData.hasChildren = false
       this.addSonData.date = '2098-29-98'
       this.addSonData.level = this.currentRow.level + 1
       this.allTableData.push(this.addSonData)
-      console.log(this.tableData1)
 
-      // this.load(this.currentRow, treeNode, resolve)
-      // this.tableKey += 1
+      if (this.maps.get(this.addSonData.parentId)){
+        const {row, treeNode, resolve} = this.maps.get(this.addSonData.parentId)
+        this.load(row, treeNode, resolve)
+      }
       this.showAddSon = false
-      // this.expandId.push(String(this.currentRow.id))
-      // console.log(this.expandId);
-
     },
 
     closeAddSon() {
@@ -323,6 +418,7 @@ export default {
       for (let i of this.allTableData) {
         if (i.level == 1) {
           this.tableData1.push(i)
+          this.tableData2.push(i)
         }
       }
     },
@@ -335,8 +431,6 @@ export default {
       for (let i of this.allTableData) {
         if (this.currentRow.id === i.id) {
           i = this.currentRow
-          console.log(i);
-          console.log(this.allTableData);
         }
       }
       this.closeLookDetails()
@@ -348,26 +442,19 @@ export default {
     },
 
     load(row, treeNode, resolve) {
-      // console.log(row)
-      // console.log(treeNode);
-      // console.log(resolve);
+      console.log(row)
+      console.log(treeNode);
+      console.log(resolve);
       let arr = []
-      for (let i of this.allTableData) {
-        if (row.id === i.id) {
-          for (let j of this.allTableData) {
-            if (j.parentId === row.id) {
-              arr.push(j)
-              setTimeout(() => {
-                resolve([...arr])
-              }, 300)
-            }
-          }
-          /*let temp = this.allTableData.find(item => item.id == row.id)
+      this.maps.set(row.id, {row, treeNode, resolve})// 加载子级后再添加子级
+      this.allTableData.forEach(item=>{
+        if (row.id === item.parentId){
+          arr.push(item)
           setTimeout(() => {
-            resolve([...temp.children])
-          }, 300)*/
+            resolve([...arr])
+          }, 300)
         }
-      }
+      })
     }
   }
 }
