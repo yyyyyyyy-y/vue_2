@@ -13,6 +13,12 @@ export const elementRoutes = {
             name: "element-table",
             component: () => import ("@/views/element/table/table"),
             meta: {title: "element-table"}
+        },
+        {
+            path: "vxe-table",
+            name: "element-vxe-table",
+            component: () => import ("@/views/element/table/vxe-table"),
+            meta: {title: "element-vxe-table"}
         }
     ]
 }

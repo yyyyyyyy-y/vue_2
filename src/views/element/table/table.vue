@@ -98,18 +98,16 @@ export default {
   name: "Table",
   data() {
     return {
+      clickLevel:0,
+
       parentMap: new Map(),
       maps: new Map(),
       test: [],
       tableKey: 0,
       expandId: [],
       tableData1: [],
-      tableData2: [],
 
       currentRow: {},
-      currentTreeNode: {},
-      currentResolve: {},
-
       showLookDetails: false,
 
       showAddSon: false,
@@ -298,7 +296,6 @@ export default {
         },
       ],
       dialogType: '',
-      newTableList:[]
     }
   },
   created() {
@@ -311,54 +308,32 @@ export default {
     },
 
     expandList(expandLevel) {
+      this.clickLevel = expandLevel
+      console.log(this.$refs.table);
+      this.getChildren(this.allTableData)
       // this.getChildren(this.tableData1,expandLevel)
-      this.aaa().then(res=>{
+      /*this.aaa().then(res=>{
         res.forEach(item=>{
           this.getChildren(item,expandLevel)
         })
       })
       console.log(this.tableData1)
-      console.log(this.expandId);
+      console.log(this.expandId);*/
     },
 
-    getChildren(item,level){
-      const temp=[]
-      let currentLevel = item.level
-      if (item.level<=level&&item.hasChildren){
-        this.allTableData.forEach(list=>{
-          if (item.id === list.parentId){
-            temp.push(list)
-            this.$set(item,'children',temp)
-          }
-        })
-        // this.expandId.push(String(item.id))
-        this.$refs.table.toggleRowExpansion(item,true)
-      }
-      currentLevel ++
-      if (currentLevel<=level){
-        item.children.forEach(data=>{
-          this.getChildren(data,level)
-        })
-      }
-    },
-
-    aaa(){
-      return new Promise(resolve => {
-        this.tableData1 = JSON.parse(JSON.stringify(this.tableData2))
-        this.expandId=[]
-        resolve(this.tableData1)
-      })
-    },
-
-    getList(list){
-      console.log(list);
-    },
-
-    getExpandList(currentLevel){
-      this.allTableData.forEach(item=>{
-        if (currentLevel === item.level){
-          console.log(item);
-          this.$refs.form.store.loadOrToggle(item)
+    getChildren(data){
+      const temp = []
+      data.forEach(item=>{
+        if (item.level <= this.clickLevel && item.hasChildren){
+          this.$refs.table.store.loadOrToggle(item)
+          this.allTableData.forEach(list=>{
+            if (item.id == list.parentId){
+              temp.push(list)
+            }
+          })
+          setTimeout(()=>{
+            this.getChildren(temp)
+          },1500)
         }
       })
     },
@@ -401,24 +376,10 @@ export default {
       console.log(row);
     },
 
-    /*getTableData1() {
-      // console.log(this.tableData);
-      let temp = JSON.parse(JSON.stringify(this.tableData))
-      for (let i of temp) {
-        if (i.children && i.children.length !== 0) {
-          i.children = []
-          i.hasChildren = true
-        }
-      }
-      // console.log(this.tableData)
-      // console.log(temp)
-      this.tableData1 = temp
-    },*/
     getTableData1() {
       for (let i of this.allTableData) {
         if (i.level == 1) {
           this.tableData1.push(i)
-          this.tableData2.push(i)
         }
       }
     },
@@ -442,9 +403,9 @@ export default {
     },
 
     load(row, treeNode, resolve) {
-      console.log(row)
-      console.log(treeNode);
-      console.log(resolve);
+      // console.log(row)
+      // console.log(treeNode);
+      // console.log(resolve);
       let arr = []
       this.maps.set(row.id, {row, treeNode, resolve})// 加载子级后再添加子级
       this.allTableData.forEach(item=>{

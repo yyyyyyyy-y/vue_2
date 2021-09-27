@@ -9,10 +9,10 @@ import {elementRoutes} from "./modules/element"
 import {es6Routes} from "./modules/es6";
 
 const publicRoutes = [
-    /*  {
+    {
         path: '/',
-        component : () => import('@/views/login/login'),
-      },*/
+        component: () => import('@/views/login/login'),
+    },
     {
         path: "/",
         component: layout,

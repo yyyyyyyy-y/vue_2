@@ -4,6 +4,7 @@
 
   <router-link to="element/tree">tree</router-link>
   <router-link to="element/table">table</router-link>
+  <router-link to="element/vxe-table">vxe-table</router-link>
 </div>
 </template>
 
