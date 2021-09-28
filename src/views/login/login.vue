@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div @click="getDocument">getDocument</div>
     <div class="block">
       <span class="demonstration">默认 click 触发子菜单</span>
       <el-cascader
@@ -226,6 +227,10 @@ export default {
     }
   },
   methods: {
+    getDocument(){
+      console.log(document.title)
+      document.title = 'login'
+    },
     handleChange(value) {
       console.log(value);
     }

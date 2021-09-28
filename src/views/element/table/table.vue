@@ -41,6 +41,8 @@
       </el-table-column>
     </el-table>
 
+    <div class="aaa"></div>
+
     <el-dialog
         title="修改"
         :visible="showLookDetails"
@@ -422,5 +424,10 @@ export default {
 </script>
 
 <style scoped>
-
+.aaa{
+  margin-left: 100px;
+  width: 200px;
+  height: 200px;
+  box-shadow: 6px 0px 5px -5px #999;
+}
 </style>

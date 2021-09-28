@@ -17,6 +17,7 @@ Vue.use(VXETable)
 
 // 引入全局样式
 import '@/styles/index.scss'
+import './permission'
 
 Vue.config.productionTip = false;
 
