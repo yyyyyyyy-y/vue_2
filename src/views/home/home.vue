@@ -2,23 +2,24 @@
   <div>
     <router-link to="element">element</router-link>
     <router-link to="es6">es6</router-link>
-    <div @click="aaa">aaa</div>
+    <div @click="getSizeInfo">getSizeInfo</div>
   </div>
 </template>
 
 <script>
-import {aaa} from "@/utils/common"
+import common from "@/utils/common"
 
 export default {
   name: "home",
+  mixins:[common],
   data() {
     return {
 
     };
   },
   methods: {
-    aaa(){
-      aaa()
+    getSizeInfo(){
+      console.log(this.mainContentHeight)
     }
   }
 }

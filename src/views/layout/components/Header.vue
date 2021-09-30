@@ -1,10 +1,14 @@
 <template>
-  <div class="header-container">header</div>
+  <div class="header-container"
+       :style="{'height':headerHeight + 'px'}"
+  >header</div>
 </template>
 
 <script>
+import common from "../../../utils/common";
 export default {
   name: 'Header',
+  mixins:[common],
   props: {
 
   },
@@ -40,11 +44,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "src/styles/index";
-
 .header-container {
   width: 100%;
-  height: 50px;
-  background: $red;
+  height: $headerHeight;
+  background: $headerColor;
 }
 </style>

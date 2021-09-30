@@ -2,7 +2,7 @@
   <div class="layout-container">
     <Header></Header>
     <div class="main-container">
-      <Nav></Nav>
+      <main-content></main-content>
       <router-view></router-view>
     </div>
     <Footer></Footer>
@@ -11,14 +11,14 @@
 
 <script>
 import Header from "./components/Header";
-import Nav from "./components/Nav";
+import MainContent from "./components/MainContent";
 import Footer from "./components/Footer"
 
 export default {
   name: 'Layout',
   components: {
     Header,
-    Nav,
+    MainContent,
     Footer
   },
   data(){

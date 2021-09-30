@@ -3,8 +3,14 @@ export const elementRoutes = {
     component: () => import("@/views/element/element"),
     children: [
         {
+            path: "nav-menu",
+            name: "element-nav-menu",
+            component: () => import("@/views/element/nav-menu/nav-menu"),
+            meta: {title: "element-nav-menu"}
+        },
+        {
             path: "tree",
-            name: "elemen-tree",
+            name: "element-tree",
             component: () => import("@/views/element/tree/tree"),
             meta: {title: "element-tree"}
         },
