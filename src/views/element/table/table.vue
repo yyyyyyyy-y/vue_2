@@ -95,11 +95,13 @@
 
 <script>
 import variables from "@/styles/variables.scss"
+
 export default {
   name: "Table",
   data() {
     return {
-      clickLevel:0,
+      loadList:[],
+      clickLevel: 0,
 
       parentMap: new Map(),
       maps: new Map(),
@@ -299,8 +301,8 @@ export default {
       dialogType: '',
     }
   },
-  computed:{
-    variables(){
+  computed: {
+    variables() {
       return variables
     }
   },
@@ -315,8 +317,18 @@ export default {
 
     expandList(expandLevel) {
       this.clickLevel = expandLevel
-      console.log(this.$refs.table);
-      this.getChildren(this.allTableData)
+      new Promise(resolve => {
+        this.allTableData.forEach(item => {
+          if (item.level <= this.clickLevel && item.hasChildren) {
+            this.loadList.push(item)
+          }
+        })
+        resolve()
+      }).then(() => {
+        this.getChildren(1)
+      })
+      // console.log(this.$refs.table);
+      // this.getChildren(this.allTableData)
       // this.getChildren(this.tableData1,expandLevel)
       /*this.aaa().then(res=>{
         res.forEach(item=>{
@@ -327,19 +339,52 @@ export default {
       console.log(this.expandId);*/
     },
 
-    getChildren(data){
-      const temp = []
-      data.forEach(item=>{
-        if (item.level <= this.clickLevel && item.hasChildren){
-          this.$refs.table.store.loadOrToggle(item)
-          this.allTableData.forEach(list=>{
-            if (item.id == list.parentId){
+    getChildren(i) {
+      if (i<=this.clickLevel){
+        new Promise(resolve=>{
+          this.loadList.forEach(item => {
+            if (item.level === i) {
+              console.log(item.id);
+              this.$refs.table.store.loadOrToggle(item)
+            }
+          })
+          resolve()
+        }).then(()=>{
+          this.getChildren()
+        })
+      }
+      /*const temp = []
+      data.forEach(item => {
+        if (item.level <= this.clickLevel && item.hasChildren) {
+          console.log(item.id);
+          // this.$refs.table.store.loadOrToggle(item)
+          this.allTableData.forEach(list => {
+            if (item.id === list.parentId) {
               temp.push(list)
             }
           })
-          setTimeout(()=>{
-            this.getChildren(temp)
-          },1500)
+        }
+      })
+      if (temp.length>0 && temp[0].level<=this.clickLevel){
+        setTimeout(() => {
+          this.getChildren(temp)
+        }, 1500)
+      }*/
+    },
+
+    load(row, treeNode, resolve) {
+      console.log("aaa");
+      // console.log("row",row);
+      // console.log("treeNode",treeNode);
+      // console.log("resolve",resolve);
+      let arr = []
+      this.maps.set(row.id, {row, treeNode, resolve})// 加载子级后再添加子级
+      this.allTableData.forEach(item => {
+        if (row.id === item.parentId) {
+          arr.push(item)
+          setTimeout(() => {
+            resolve([...arr])
+          }, 100)
         }
       })
     },
@@ -367,7 +412,7 @@ export default {
       this.addSonData.level = this.currentRow.level + 1
       this.allTableData.push(this.addSonData)
 
-      if (this.maps.get(this.addSonData.parentId)){
+      if (this.maps.get(this.addSonData.parentId)) {
         const {row, treeNode, resolve} = this.maps.get(this.addSonData.parentId)
         this.load(row, treeNode, resolve)
       }
@@ -407,22 +452,6 @@ export default {
       this.currentRow = JSON.parse(JSON.stringify(row))
       this.showLookDetails = true
     },
-
-    load(row, treeNode, resolve) {
-      // console.log(row)
-      // console.log(treeNode);
-      // console.log(resolve);
-      let arr = []
-      this.maps.set(row.id, {row, treeNode, resolve})// 加载子级后再添加子级
-      this.allTableData.forEach(item=>{
-        if (row.id === item.parentId){
-          arr.push(item)
-          setTimeout(() => {
-            resolve([...arr])
-          }, 300)
-        }
-      })
-    }
   }
 }
 </script>
