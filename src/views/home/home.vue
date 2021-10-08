@@ -1,8 +1,6 @@
 <template>
   <div>
-    <router-link to="element">element</router-link>
-    <router-link to="es6">es6</router-link>
-    <div @click="getSizeInfo">getSizeInfo</div>
+    home
   </div>
 </template>
 
@@ -18,9 +16,7 @@ export default {
     };
   },
   methods: {
-    getSizeInfo(){
-      console.log(this.mainContentHeight)
-    }
+
   }
 }
 </script>

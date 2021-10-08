@@ -1,8 +1,6 @@
 <template>
   <div>
     <router-view></router-view>
-
-    <router-link to="es6/promise">promise</router-link>
   </div>
 </template>
 

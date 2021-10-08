@@ -35,5 +35,6 @@ module.exports = {
         "no-lone-blocks": 2,//禁止不必要的嵌套块
         "no-mixed-requires": [0, false],//声明时不能混用声明类型
 
+        "no-unused-vars": "off",//函数参数未使用不报错
     }
 };

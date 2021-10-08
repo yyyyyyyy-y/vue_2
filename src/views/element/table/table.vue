@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%;">
     <el-table
         ref="table"
         :data="tableData1"

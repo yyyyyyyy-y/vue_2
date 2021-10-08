@@ -38,7 +38,6 @@ export default {
         age1:item.age
       }
     })
-    console.log("aaa",this.aaa)
   }
 };
 </script>

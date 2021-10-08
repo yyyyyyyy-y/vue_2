@@ -1,5 +1,6 @@
 export const es6Routes = {
     path: "/es6",
+    name: "es6",
     component: () => import("@/views/es6/es6"),
     children: [
         {
