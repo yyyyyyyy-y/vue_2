@@ -353,9 +353,9 @@ export default {
           this.$refs.table.store.states.treeData[key].expanded = false
         })*/
       } else if (expandLevel < this.clickLevel) {
-        console.log("<");
-        this.clickLevel = 0
-        this.closeChildren()
+        this.closeChildren(expandLevel)
+        // console.log(Object.keys(this.$refs.table.store.states.treeData));
+        // this.closeChildren()
       }
       /*if (expandLevel > this.clickLevel) {
         this.clickLevel = expandLevel
@@ -399,8 +399,22 @@ export default {
       }
     },
 
-    closeChildren(){
-
+    closeChildren(expandLevel){
+      console.log("<");
+      console.log(expandLevel);
+      console.log(this.clickLevel);
+      console.log(this.$refs.table.store.states.treeData)
+      this.loadList.forEach(item=>{
+        if (item.level>expandLevel && item.level<=this.clickLevel){
+          // console.log(item)
+          Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
+            if (item.id == key){
+              console.log(this.$refs.table.store.states.treeData[key]);
+              this.$refs.table.store.states.treeData[key].expanded = false
+            }
+          })
+        }
+      })
     },
 
     load(row, treeNode, resolve) {
