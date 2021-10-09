@@ -5,7 +5,7 @@ export const es6Routes = {
     children: [
         {
             path: "promise",
-            name: "es6-promise",
+            name: "promise",
             component: () => import("@/views/es6/promise/promise"),
             meta: {
                 title: "es6-promise"

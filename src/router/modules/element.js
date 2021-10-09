@@ -21,6 +21,12 @@ export const elementRoutes = {
             component: () => import ("@/views/element/table/table"),
             meta: {title: "element-table"}
         },
+        {
+            path: "upload",
+            name: "upload",
+            component: () => import ("@/views/element/upload/upload"),
+            meta: {title: "element-upload"}
+        },
         /*{
             path: "vxe-table",
             name: "vxe-table",

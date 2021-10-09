@@ -1,6 +1,7 @@
 <template>
   <div style="width: 100%;">
     <el-table
+        v-loading="loading"
         ref="table"
         :data="tableData1"
         style="width: 100%"
@@ -100,7 +101,8 @@ export default {
   name: "Table",
   data() {
     return {
-      loadList:[],
+      loading: false,
+      loadList: [],
       clickLevel: 0,
 
       parentMap: new Map(),
@@ -124,19 +126,19 @@ export default {
           address: '上海市普陀区金沙江路 1518 弄',
           children: [
             {
-              id: 5,
+              id: 11,
               date: '2016-05-02',
               name: '王小虎',
               address: '上海市普陀区金沙江路 1518 弄',
               children: [
                 {
-                  id: 8,
+                  id: 111,
                   date: '2016-05-02',
                   name: '王小虎',
                   address: '上海市普陀区金沙江路 1518 弄'
                 },
                 {
-                  id: 9,
+                  id: 112,
                   date: '2016-05-02',
                   name: '王小虎',
                   address: '上海市普陀区金沙江路 1518 弄'
@@ -144,13 +146,13 @@ export default {
               ]
             },
             {
-              id: 6,
+              id: 12,
               date: '2016-05-02',
               name: '王小虎',
               address: '上海市普陀区金沙江路 1518 弄'
             },
             {
-              id: 7,
+              id: 13,
               date: '2016-05-02',
               name: '王小虎',
               address: '上海市普陀区金沙江路 1518 弄'
@@ -161,7 +163,15 @@ export default {
           id: 2,
           date: '2016-05-04',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
+          address: '上海市普陀区金沙江路 1517 弄',
+          children: [
+            {
+              id: 21,
+              date: '2016-05-04',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1517 弄'
+            },
+          ]
         },
         {
           id: 3,
@@ -316,64 +326,84 @@ export default {
     },
 
     expandList(expandLevel) {
-      this.clickLevel = expandLevel
-      new Promise(resolve => {
+      if (expandLevel > this.clickLevel) {
+        // console.log(this.$refs.table.store.states.treeData);
+        this.clickLevel = expandLevel
+        this.loadList = []
+        // 获取想要展开的层级的所有数据
         this.allTableData.forEach(item => {
           if (item.level <= this.clickLevel && item.hasChildren) {
             this.loadList.push(item)
           }
         })
-        resolve()
-      }).then(() => {
-        this.getChildren(1)
-      })
-      // console.log(this.$refs.table);
-      // this.getChildren(this.allTableData)
-      // this.getChildren(this.tableData1,expandLevel)
-      /*this.aaa().then(res=>{
-        res.forEach(item=>{
-          this.getChildren(item,expandLevel)
-        })
-      })
-      console.log(this.tableData1)
-      console.log(this.expandId);*/
-    },
-
-    getChildren(i) {
-      if (i<=this.clickLevel){
-        new Promise(resolve=>{
-          this.loadList.forEach(item => {
-            if (item.level === i) {
-              console.log(item.id);
-              this.$refs.table.store.loadOrToggle(item)
+        let maxLevel = 0
+        this.loadList.forEach(item => {
+          Object.keys(this.$refs.table.store.states.treeData).forEach(key => {
+            if (item.id == key) {
+              maxLevel = maxLevel > item.level ? maxLevel : item.level
             }
           })
-          resolve()
-        }).then(()=>{
-          this.getChildren()
         })
+        this.getChildren(maxLevel)
+      } else if (expandLevel === this.clickLevel) {
+        // this.clickLevel = 0
+        console.log("=");
+        /*console.log(this.$refs.table.store.states.treeData);
+        Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
+          this.$refs.table.store.states.treeData[key].expanded = false
+        })*/
+      } else if (expandLevel < this.clickLevel) {
+        console.log("<");
+        this.clickLevel = 0
+        this.closeChildren()
       }
-      /*const temp = []
-      data.forEach(item => {
-        if (item.level <= this.clickLevel && item.hasChildren) {
-          console.log(item.id);
-          // this.$refs.table.store.loadOrToggle(item)
-          this.allTableData.forEach(list => {
-            if (item.id === list.parentId) {
-              temp.push(list)
+      /*if (expandLevel > this.clickLevel) {
+        this.clickLevel = expandLevel
+        new Promise(resolve => {
+          this.allTableData.forEach(item => {
+            if (item.level <= this.clickLevel && item.hasChildren) {
+              this.loadList.push(item)
             }
           })
-        }
-      })
-      if (temp.length>0 && temp[0].level<=this.clickLevel){
-        setTimeout(() => {
-          this.getChildren(temp)
-        }, 1500)
+          console.log(this.loadList);
+          resolve()
+        }).then(() => {
+          this.getChildren(1)
+        })
       }*/
     },
 
+    getChildren(maxLevel) {
+      // console.log(this.loadList)
+      /*console.log(this.$refs.table.store.states.treeData);
+      Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
+        this.$refs.table.store.states.treeData[key].expanded = true
+        this.$refs.table.store.states.treeData[key].loaded = false
+      })*/
+      // console.log("maxLevel",maxLevel);
+      // console.log("clickLevel",this.clickLevel);
+      while (maxLevel <= this.clickLevel) {
+        new Promise(resolve => {
+          this.loadList.forEach(item => {
+            if (item.level === maxLevel) {
+              this.$refs.table.store.loadOrToggle(item)
+            }
+          })
+          maxLevel = maxLevel + 1
+          resolve(maxLevel)
+        }).then((maxLevel)=>{
+          setTimeout(()=>{
+            this.getChildren(maxLevel)
+          },500)
+        })
+      }
+    },
+
+    closeChildren(){
+
+    },
+
     load(row, treeNode, resolve) {
-      console.log("aaa");
       // console.log("row",row);
       // console.log("treeNode",treeNode);
       // console.log("resolve",resolve);
