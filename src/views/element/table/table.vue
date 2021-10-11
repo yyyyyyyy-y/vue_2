@@ -187,126 +187,33 @@ export default {
         }
       ],
       allTableData: [
-        {
-          id: 1,
-          date: '2016-05-02',
-          name: '王小虎1',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: '',
-          hasChildren: true,
-          children: [],
-          level: 1
-        },
-        {
-          id: 11,
-          date: '2016-05-02',
-          name: '王小牛11',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 1,
-          hasChildren: true,
-          children: [],
-          level: 2
-        },
-        {
-          id: 111,
-          date: '2016-05-02',
-          name: '王小牛111',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 11,
-          hasChildren: true,
-          children: [],
-          level: 3
-        },
-        {
-          id: 1111,
-          date: '2016-05-02',
-          name: '王小牛111',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 111,
-          hasChildren: true,
-          children: [],
-          level: 4
-        },
-        {
-          id: 11111,
-          date: '2016-05-02',
-          name: '王小牛111',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 1111,
-          hasChildren: false,
-          children: [],
-          level: 5
-        },
-        {
-          id: 112,
-          date: '2016-05-02',
-          name: '王小虎112',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 11,
-          hasChildren: false,
-          children: [],
-          level: 3
-        },
-        {
-          id: 12,
-          date: '2016-05-02',
-          name: '王小牛12',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 1,
-          hasChildren: true,
-          children: [],
-          level: 2
-        },
-        {
-          id: 121,
-          date: '2016-05-02',
-          name: '王小虎121',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 12,
-          hasChildren: false,
-          children: [],
-          level: 3
-        },
-        {
-          id: 2,
-          date: '2016-05-02',
-          name: '王小猫2',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: '',
-          hasChildren: true,
-          children: [],
-          level: 1
-        },
-        {
-          id: 21,
-          date: '2016-05-02',
-          name: '王小虎21',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 2,
-          hasChildren: true,
-          children: [],
-          level: 2
-        },
-        {
-          id: 211,
-          date: '2016-05-02',
-          name: '王小虎21',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: 21,
-          hasChildren: false,
-          children: [],
-          level: 3
-        },
-        {
-          id: 3,
-          date: '2016-05-02',
-          name: '王小狗3',
-          address: '上海市普陀区金沙江路 1518 弄',
-          parentId: '',
-          hasChildren: false,
-          children: [],
-          level: 1
-        },
+        {id: 1, date: '2016-05-02', name: '王小虎1', address: '上海市普陀区金沙江路 1518 弄', parentId: '', hasChildren: true, children: [], level: 1},
+        {id: 11, date: '2016-05-02', name: '王小牛11', address: '上海市普陀区金沙江路 1518 弄', parentId: 1, hasChildren: true, children: [], level: 2},
+        {id: 111, date: '2016-05-02', name: '王小牛111', address: '上海市普陀区金沙江路 1518 弄', parentId: 11, hasChildren: true, children: [], level: 3},
+        {id: 1111, date: '2016-05-02', name: '王小牛111', address: '上海市普陀区金沙江路 1518 弄', parentId: 111, hasChildren: true, children: [], level: 4},
+        {id: 11111, date: '2016-05-02', name: '王小牛111', address: '上海市普陀区金沙江路 1518 弄', parentId: 1111, hasChildren: false,  children: [], level: 5},
+        {id: 112, date: '2016-05-02', name: '王小虎112', address: '上海市普陀区金沙江路 1518 弄', parentId: 11, hasChildren: false, children: [], level: 3},
+        {id: 12, date: '2016-05-02', name: '王小牛12', address: '上海市普陀区金沙江路 1518 弄', parentId: 1, hasChildren: true, children: [], level: 2},
+        {id: 121, date: '2016-05-02', name: '王小虎121', address: '上海市普陀区金沙江路 1518 弄', parentId: 12, hasChildren: false, children: [], level: 3},
+        {id: 2, date: '2016-05-02', name: '王小猫2', address: '上海市普陀区金沙江路 1518 弄', parentId: '', hasChildren: true, children: [], level: 1},
+        {id: 21, date: '2016-05-02', name: '王小虎21', address: '上海市普陀区金沙江路 1518 弄', parentId: 2, hasChildren: true, children: [], level: 2},
+        {id: 211, date: '2016-05-02', name: '王小虎21', address: '上海市普陀区金沙江路 1518 弄', parentId: 21, hasChildren: true, children: [], level: 3},
+        {id: 2111, date: '2016-05-02', name: '王小虎21', address: '上海市普陀区金沙江路 1518 弄', parentId: 211, hasChildren: false, children: [], level: 4},
+       /* {id: 3, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: '', hasChildren: true,children: [], level: 1},
+        {id: 31, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 3, hasChildren: true,children: [], level: 2},
+        {id: 311, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 31, hasChildren: true,children: [], level: 3},
+        {id: 3111, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 311, hasChildren: true,children: [], level: 4},
+        {id: 31111, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 3111, hasChildren: false,children: [], level: 5},
+        {id: 4, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: '', hasChildren: true,children: [], level: 1},
+        {id: 41, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 4, hasChildren: true,children: [], level: 2},
+        {id: 411, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 41, hasChildren: true,children: [], level: 3},
+        {id: 4111, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 411, hasChildren: true,children: [], level: 4},
+        {id: 41111, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 4111, hasChildren: false,children: [], level: 5},
+        {id: 5, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: '', hasChildren: true,children: [], level: 1},
+        {id: 51, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 5, hasChildren: true,children: [], level: 2},
+        {id: 511, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 51, hasChildren: true,children: [], level: 3},
+        {id: 5111, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 511, hasChildren: true,children: [], level: 4},
+        {id: 51111, date: '2016-05-02', name: '王小狗3', address: '上海市普陀区金沙江路 1518 弄', parentId: 5111, hasChildren: false,children: [], level: 5},*/
       ],
       dialogType: '',
     }
@@ -326,8 +233,7 @@ export default {
     },
 
     expandList(expandLevel) {
-      if (expandLevel > this.clickLevel) {
-        // console.log(this.$refs.table.store.states.treeData);
+      if (expandLevel >= this.clickLevel) {
         this.clickLevel = expandLevel
         this.loadList = []
         // 获取想要展开的层级的所有数据
@@ -345,43 +251,14 @@ export default {
           })
         })
         this.getChildren(maxLevel)
-      } else if (expandLevel === this.clickLevel) {
-        // this.clickLevel = 0
-        console.log("=");
-        /*console.log(this.$refs.table.store.states.treeData);
-        Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
-          this.$refs.table.store.states.treeData[key].expanded = false
-        })*/
       } else if (expandLevel < this.clickLevel) {
         this.closeChildren(expandLevel)
-        // console.log(Object.keys(this.$refs.table.store.states.treeData));
-        // this.closeChildren()
       }
-      /*if (expandLevel > this.clickLevel) {
-        this.clickLevel = expandLevel
-        new Promise(resolve => {
-          this.allTableData.forEach(item => {
-            if (item.level <= this.clickLevel && item.hasChildren) {
-              this.loadList.push(item)
-            }
-          })
-          console.log(this.loadList);
-          resolve()
-        }).then(() => {
-          this.getChildren(1)
-        })
-      }*/
     },
 
     getChildren(maxLevel) {
-      // console.log(this.loadList)
-      /*console.log(this.$refs.table.store.states.treeData);
-      Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
-        this.$refs.table.store.states.treeData[key].expanded = true
-        this.$refs.table.store.states.treeData[key].loaded = false
-      })*/
-      // console.log("maxLevel",maxLevel);
-      // console.log("clickLevel",this.clickLevel);
+      console.log("maxLevel",maxLevel);
+      console.log("clickLevel",this.clickLevel);
       while (maxLevel <= this.clickLevel) {
         new Promise(resolve => {
           this.loadList.forEach(item => {
@@ -397,40 +274,67 @@ export default {
           },500)
         })
       }
+      this.loadList.forEach(item=>{
+        Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
+          if (item.id == key){
+            this.$refs.table.store.states.treeData[key].expanded = true
+            this.$refs.table.store.states.treeData[key].loaded = false
+          }
+        })
+      })
+      /*Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
+        if (this.$refs.table.store.states.treeData[key].expanded === true){
+          this.$refs.table.store.states.treeData[key].loaded = false
+          this.$refs.table.store.states.treeData[key].expanded = true
+        }
+      })*/
+      // console.log(this.loadList);
+      console.log(this.$refs.table.store.states.treeData);
     },
 
     closeChildren(expandLevel){
       console.log("<");
       console.log(expandLevel);
       console.log(this.clickLevel);
-      console.log(this.$refs.table.store.states.treeData)
+      // console.log(this.$refs.table.store.states.treeData)
       this.loadList.forEach(item=>{
         if (item.level>expandLevel && item.level<=this.clickLevel){
           // console.log(item)
           Object.keys(this.$refs.table.store.states.treeData).forEach(key=>{
             if (item.id == key){
-              console.log(this.$refs.table.store.states.treeData[key]);
+              // console.log(this.$refs.table.store.states.treeData[key]);
               this.$refs.table.store.states.treeData[key].expanded = false
             }
           })
         }
       })
+      this.clickLevel = expandLevel
     },
 
     load(row, treeNode, resolve) {
       // console.log("row",row);
-      // console.log("treeNode",treeNode);
+      console.log("treeNode",treeNode);
       // console.log("resolve",resolve);
-      let arr = []
-      this.maps.set(row.id, {row, treeNode, resolve})// 加载子级后再添加子级
-      this.allTableData.forEach(item => {
-        if (row.id === item.parentId) {
-          arr.push(item)
-          setTimeout(() => {
-            resolve([...arr])
-          }, 100)
-        }
-      })
+      console.log(this.$refs.table.store.states.treeData);
+      if (treeNode.expanded === true){
+        console.log(treeNode);
+        treeNode.expanded = false
+        treeNode.loading = false
+        treeNode.loaded = false
+        console.log(treeNode);
+
+      }else{
+        let arr = []
+        this.maps.set(row.id, {row, treeNode, resolve})// 加载子级后再添加子级
+        this.allTableData.forEach(item => {
+          if (row.id === item.parentId) {
+            arr.push(item)
+            setTimeout(() => {
+              resolve([...arr])
+            }, 100)
+          }
+        })
+      }
     },
 
     addSon(scope) {
