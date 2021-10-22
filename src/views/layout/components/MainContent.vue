@@ -15,6 +15,9 @@ export default {
   mixins:[common],
   components: {
     NavMenu
+  },
+  methods:{
+
   }
 }
 </script>

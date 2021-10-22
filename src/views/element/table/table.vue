@@ -11,7 +11,7 @@
         :expand-row-keys="expandId"
         :load="load"
         :key="tableKey"
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+        :tree-props="{children: 'children1', hasChildren: 'hasChildren'}">
       <el-table-column
           prop="name"
           label="姓名"
@@ -39,6 +39,38 @@
           <el-button @click="addOrLookDetails(scope.row)">修改</el-button>
           <el-button @click="deleteSon(scope.row)">删除</el-button>
         </template>
+      </el-table-column>
+    </el-table>
+
+    <el-table
+        ref="table2"
+        :data="tableData"
+        style="width: 100%"
+        row-key="id"
+        lazy
+        :load="load1"
+        @expand-change="expandChange"
+        :tree-props="{children: 'children1', hasChildren: 'hasChildren'}"
+    >
+      <el-table-column
+          prop="name"
+          label="姓名"
+          width="180">
+        <template slot="header">
+          <span>姓名</span>
+          <span
+              style="width: 20px;height: 20px;display: inline-block;margin-left: 10px;border-radius: 20px;border: 1px solid red;"
+              v-for="i in 5" :key="i" @click="expandList(i)">{{ i }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+          prop="date"
+          label="生日"
+          width="180">
+      </el-table-column>
+      <el-table-column
+          prop="address"
+          label="地址">
       </el-table-column>
     </el-table>
 
@@ -124,24 +156,28 @@ export default {
           date: '2016-05-02',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄',
+          hasChildren:1,
           children: [
             {
               id: 11,
               date: '2016-05-02',
               name: '王小虎',
               address: '上海市普陀区金沙江路 1518 弄',
+              hasChildren:1,
               children: [
                 {
                   id: 111,
                   date: '2016-05-02',
                   name: '王小虎',
-                  address: '上海市普陀区金沙江路 1518 弄'
+                  address: '上海市普陀区金沙江路 1518 弄',
+                  hasChildren:0,
                 },
                 {
                   id: 112,
                   date: '2016-05-02',
                   name: '王小虎',
-                  address: '上海市普陀区金沙江路 1518 弄'
+                  address: '上海市普陀区金沙江路 1518 弄',
+                  hasChildren:0,
                 }
               ]
             },
@@ -149,13 +185,15 @@ export default {
               id: 12,
               date: '2016-05-02',
               name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
+              address: '上海市普陀区金沙江路 1518 弄',
+              hasChildren:0,
             },
             {
               id: 13,
               date: '2016-05-02',
               name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄'
+              address: '上海市普陀区金沙江路 1518 弄',
+              hasChildren:0,
             }
           ]
         },
@@ -164,12 +202,14 @@ export default {
           date: '2016-05-04',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1517 弄',
+          hasChildren:1,
           children: [
             {
               id: 21,
               date: '2016-05-04',
               name: '王小虎',
-              address: '上海市普陀区金沙江路 1517 弄'
+              address: '上海市普陀区金沙江路 1517 弄',
+              hasChildren:0,
             },
           ]
         },
@@ -178,12 +218,14 @@ export default {
           date: '2016-05-01',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1519 弄',
+          hasChildren:0,
         },
         {
           id: 4,
           date: '2016-05-03',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+          address: '上海市普陀区金沙江路 1516 弄',
+          hasChildren:0,
         }
       ],
       allTableData: [
@@ -228,8 +270,17 @@ export default {
     this.getTableData1()
   },
   methods: {
-    getTest(scope) {
-      console.log(scope)
+    expandChange(row,expanded){
+      console.log(row);
+    },
+    load1(tree,treeNode,resolve){
+      console.log("load",tree);
+      resolve(tree.children)
+      console.log(this.$refs.table2.store);
+    },
+
+    getTest() {
+      console.log(this.$refs.table)
     },
 
     expandList(expandLevel) {
@@ -315,7 +366,7 @@ export default {
       // console.log("row",row);
       console.log("treeNode",treeNode);
       // console.log("resolve",resolve);
-      console.log(this.$refs.table.store.states.treeData);
+      console.log(this.$refs.table.store);
       if (treeNode.expanded === true){
         console.log(treeNode);
         treeNode.expanded = false
@@ -335,6 +386,16 @@ export default {
           }
         })
       }
+      let arr = []
+      this.maps.set(row.id, {row, treeNode, resolve})// 加载子级后再添加子级
+      this.allTableData.forEach(item => {
+        if (row.id === item.parentId) {
+          arr.push(item)
+          setTimeout(() => {
+            resolve([...arr])
+          }, 100)
+        }
+      })
     },
 
     addSon(scope) {

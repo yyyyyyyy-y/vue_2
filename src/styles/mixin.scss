@@ -1,0 +1,121 @@
+@mixin flex($jc: center, $ai: center, $fw: wrap, $ac: center) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-wrap: $fw;
+  align-content: $ac;
+}
+
+@mixin font($fs: 14px, $fw: normal, $c: null, $lh: null, $ta: center) {
+  font-size: $fs;
+  font-weight: $fw;
+  color: $c;
+  line-height: $lh;
+  text-align: $ta;
+}
+
+@mixin box($p: null, $w: null, $h: null,$bs:border-box) {
+  position: $p;
+  width: $w;
+  height: $h;
+  box-sizing: $bs;
+}
+
+@mixin overflow($o:hidden,$ox:hidden,$oy:hidden) {
+  overflow: $o;
+  overflow-x: $ox;
+  overflow-y: $oy;
+}
+
+@mixin margin($mt: null, $mb: null, $ml: null, $mr: null, $m: null) {
+  margin-top: $mt;
+  margin-bottom: $mb;
+  margin-left: $ml;
+  margin-right: $mr;
+  margin: $m;
+}
+
+@mixin padding($pt: null, $pb: null, $pl: null, $pr: null, $p: null) {
+  padding-top: $pt;
+  padding-bottom: $pb;
+  padding-left: $pl;
+  padding-right: $pr;
+  padding: $p;
+}
+
+@mixin border(
+  $bt: null,
+  $bb: null,
+  $bl: null,
+  $br: null,
+  $bs: null,
+  $bc: null,
+  $bra: null,
+  $bsd: null,
+  $b: null
+) {
+  border: $b;
+  border-top: $bt;
+  border-bottom: $bb;
+  border-left: $bl;
+  border-right: $br;
+  border-collapse: $bc;
+  border-spacing: $bs;
+  border-radius: $bra;
+  box-shadow: $bsd;
+}
+
+@mixin bg(
+  $c: null,
+  $s: null,
+  $img: null,
+  $p: null,
+  $r: null,
+  $cl: null,
+  $o: null,
+  $bg: null
+) {
+  background: $bg;
+  background-color: $c;
+  background-size: $s;
+  background-image: $img;
+  background-position: $p;
+  background-repeat: $r;
+  background-clip: $cl;
+  background-origin: $o;
+}
+
+@mixin pos($p: null, $l: null, $r: null, $t: null, $b: null, $z: null) {
+  position: $p;
+  top: $t;
+  bottom: $b;
+  left: $l;
+  right: $r;
+  z-index: $z;
+}
+
+// 包含transition和animate系列，
+@mixin animate($t: null) {
+  transition: $t;
+}
+
+@mixin transform(
+  $sx: null,
+  $sy: null,
+  $s: null,
+  $tx: null,
+  $ty: null,
+  $t: null
+) {
+  transform: scaleX($sx);
+  transform: scaleY($sy);
+  transform: scale($s);
+  transform: translateX($sx);
+  transform: translateX($sy);
+  transform: translate($s);
+}
+
+@mixin other($c: null) {
+  cursor: $c;
+}
+

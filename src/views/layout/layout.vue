@@ -2,7 +2,7 @@
   <div class="layout-container">
     <Header></Header>
     <div class="main-container">
-      <main-content></main-content>
+      <main-content ref="mainContent"></main-content>
       <router-view></router-view>
     </div>
     <Footer></Footer>
@@ -24,6 +24,11 @@ export default {
   data(){
     return{
     }
+  },
+  methods:{
+    getTest() {
+      this.$refs['mainContent'].aaa()
+    },
   }
 };
 </script>
