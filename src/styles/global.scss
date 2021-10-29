@@ -1,0 +1,9 @@
+.main-container{
+  width: calc(100% - #{$navMenuWidth});
+  background-color: #fefefe;
+  padding: 20px;
+}
+
+.normal-title{
+  @include font($fs: 18px, $fw: bold, $c: #1f1f1f, $lh: null, $ta: null)
+}

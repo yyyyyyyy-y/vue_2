@@ -14,8 +14,7 @@
   text-align: $ta;
 }
 
-@mixin box($p: null, $w: null, $h: null,$bs:border-box) {
-  position: $p;
+@mixin box($w: null, $h: null,$bs:border-box) {
   width: $w;
   height: $h;
   box-sizing: $bs;

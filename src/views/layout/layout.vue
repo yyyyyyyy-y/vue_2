@@ -1,24 +1,21 @@
 <template>
   <div class="layout-container">
     <Header></Header>
-    <div class="main-container">
-      <main-content ref="mainContent"></main-content>
-      <router-view></router-view>
-    </div>
+    <Content></Content>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
-import MainContent from "./components/MainContent";
 import Footer from "./components/Footer"
+import Content from "./components/Content";
 
 export default {
   name: 'Layout',
   components: {
+    Content,
     Header,
-    MainContent,
     Footer
   },
   data(){
@@ -34,7 +31,4 @@ export default {
 </script>
 
 <style scoped>
-.main-container{
-  display: flex;
-}
 </style>

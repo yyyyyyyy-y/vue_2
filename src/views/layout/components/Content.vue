@@ -1,8 +1,7 @@
 <template>
-  <div class="main-content-container"
-       :style="{'height':mainContentHeight + 'px'}"
-  >
+  <div class="content-container" :style="{'height':mainContentHeight + 'px'}">
     <nav-menu></nav-menu>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,7 +10,7 @@ import NavMenu from "@/views/element/nav-menu/nav-menu"
 import common from "../../../utils/common";
 
 export default {
-  name: "MainContent",
+  name: "Content",
   mixins:[common],
   components: {
     NavMenu
@@ -23,7 +22,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main-content-container{
-
+.content-container{
+  @include flex($jc: null, $ai: null, $fw: null, $ac: null)
 }
 </style>

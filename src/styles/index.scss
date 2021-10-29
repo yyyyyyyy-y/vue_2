@@ -1,3 +1,7 @@
+@import "./global.scss";
+@import "element-reset";
+
+/* reset css style*/
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;// Firefox字体平滑
@@ -6,7 +10,6 @@ body {
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
-//
 *{
   padding: 0;
   margin: 0;

@@ -11,7 +11,7 @@
         <template slot="title">
           <span class="nav-menu-title">{{item1.name}}</span>
         </template>
-        <el-menu-item  :index="item2.path" v-for="item2 in item1.children" :key="item2.path">{{ item2.name }}</el-menu-item>
+        <el-menu-item :index="item2.path" v-for="item2 in item1.children" :key="item2.path">{{ item2.name }}</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -39,8 +39,9 @@ export default {
   },
   methods: {
     getNavMenu(){
+      console.log(this.$router);
       this.$router.options.routes.forEach(item=>{
-        if (item.path==="/element" || item.path==="/es6"){
+        if (item.path==="/element" || item.path==="/es6" || item.path==="/vue" ){
           this.navMenu.push(item)
         }
       })
