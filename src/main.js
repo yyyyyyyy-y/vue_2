@@ -3,6 +3,8 @@ import App from './App.vue';
 
 // 引入路由
 import router from './router';
+// 路由设置文件
+import './permission'
 
 // 引入element-ui
 import ElementUI from 'element-ui';// 引入依赖
@@ -17,12 +19,15 @@ Vue.use(VXETable)
 
 // 引入全局样式
 import '@/styles/index.scss'
-// 路由设置文件
-import './permission'
+
+// 引入store
+import store from './store'
+
 
 Vue.config.productionTip = false;
 
 new Vue({
     router,// 路由挂载
+    store, // 引入状态管理
     'render': h => h(App)
 }).$mount('#app');

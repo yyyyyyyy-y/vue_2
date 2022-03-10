@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import common from "../../../utils/common";
+import mixin from "../../../mixin/mixin";
 export default {
   name: "footer-container",
-  mixins:[common]
+  mixins:[mixin]
 }
 </script>
 

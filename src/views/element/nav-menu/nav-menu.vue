@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import common from "@/utils/common"
 import variables from "@/styles/variables.scss"
+import mixin from "../../../mixin/mixin";
 
 export default {
   name: "nav-menu",
-  mixins: [common],
+  mixins:[mixin],
   data(){
     return{
       navMenu:[]

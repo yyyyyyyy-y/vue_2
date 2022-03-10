@@ -7,11 +7,11 @@
 
 <script>
 import NavMenu from "@/views/element/nav-menu/nav-menu"
-import common from "../../../utils/common";
+import mixin from "../../../mixin/mixin";
 
 export default {
   name: "Content",
-  mixins:[common],
+  mixins:[mixin],
   components: {
     NavMenu
   },

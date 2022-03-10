@@ -23,9 +23,7 @@ export default {
     }
   },
   methods:{
-    getTest() {
-      this.$refs['mainContent'].aaa()
-    },
+
   }
 };
 </script>

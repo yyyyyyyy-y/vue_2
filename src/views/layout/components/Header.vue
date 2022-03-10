@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import common from "../../../utils/common";
+import mixin from "../../../mixin/mixin";
 export default {
   name: 'Header',
-  mixins:[common],
+  mixins:[mixin],
   props: {
 
   },
